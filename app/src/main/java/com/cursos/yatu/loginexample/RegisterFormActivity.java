@@ -194,6 +194,7 @@ public class RegisterFormActivity extends AppCompatActivity implements DatePicke
 
         // Convertir en JSON
         JSONObject jsonUser;
+
     }
 
     private void configCalendar() {
