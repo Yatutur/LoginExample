@@ -1,8 +1,5 @@
 package com.cursos.yatu.loginexample.data;
 
-import android.app.Activity;
-import android.content.Context;
-
 import com.cursos.yatu.loginexample.data.model.LoggedInUser;
 import com.cursos.yatu.loginexample.data.model.ServerCallback;
 

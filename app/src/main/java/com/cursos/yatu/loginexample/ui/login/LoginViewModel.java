@@ -39,7 +39,7 @@ public class LoginViewModel extends ViewModel {
                 Result.Success<LoggedInUser> resultLocal = new Result.Success<>(result);
                 LoggedInUser data = ((Result.Success<LoggedInUser>) resultLocal).getData();
                 loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName(),
-                        data.getFirstName(), data.getLastName(), data.getBirthdate(),
+                        data.getFirstName(), data.getLastName(), data.getBirthday(),
                         data.getEmail(), data.getAddress(), data.getNotes())));
             }
 
@@ -57,17 +57,6 @@ public class LoginViewModel extends ViewModel {
         if (!isEmailValid(email)) {
             loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
         } else if (!isPasswordValid(password)) {
-            loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
-        } else {
-            loginFormState.setValue(new LoginFormState(true));
-        }
-    }
-
-    public void registerDataChanged(String email, String password, String repeatPassword) {
-        if (!isEmailValid(email)) {
-            loginFormState.setValue(new LoginFormState(R.string.invalid_email, null));
-        } else if ((!isPasswordValid(password) || !isPasswordValid(repeatPassword))
-                || password == repeatPassword) {
             loginFormState.setValue(new LoginFormState(null, R.string.invalid_password));
         } else {
             loginFormState.setValue(new LoginFormState(true));

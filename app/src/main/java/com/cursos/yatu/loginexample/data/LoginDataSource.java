@@ -15,6 +15,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cursos.yatu.loginexample.R;
+import com.cursos.yatu.loginexample.data.model.Connecting;
 import com.cursos.yatu.loginexample.data.model.LoggedInUser;
 import com.cursos.yatu.loginexample.data.model.ServerCallback;
 import com.cursos.yatu.loginexample.ui.login.LoginActivity;
@@ -31,16 +32,17 @@ import java.util.Map;
 public class LoginDataSource extends AppCompatActivity {
 
     private static final String SERVER_URL =
-            "http://yatuandroidserver.ddns.net:4545/login_example/userLogin.php";
+            "https://yatuandroidserver.ddns.net:4546/login_example/userLogin.php";
 
     JSONObject jsonObjectResponse = null;
     boolean userPassIncorrect = false;
     LoggedInUser userLogin = null;
+    private final String TAG = "LoginDataSource";
 
     public void login(final String email, final String password,
                                       ServerCallback serverCallback) {
 
-        Log.d ("LoginDataSource", "Comienza login");
+        Log.d (TAG, "Comienza login");
         callServer (email, password, serverCallback);
 
     }
@@ -60,15 +62,12 @@ public class LoginDataSource extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
 
-                Log.d ("LoginDataSource", "Entra en onResponse");
-                if (!response.equals("Wrong email or password")) {
+                Log.d (TAG, "Entra en onResponse");
+                if (response.indexOf("Wrong email or password") == -1) {
                     try {
-                        Log.d ("LoginDataSource", "Usuario y contraseña correcta");
+                        Log.d (TAG, getString(R.string.correct_password));
+                        Log.d (TAG, "Response: " + response);
                         jsonObjectResponse = new JSONObject(response);
-
-//                        Toast.makeText(LoginActivity.getContext(),
-//                                "Server response: " + response,
-//                                Toast.LENGTH_LONG).show();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -79,7 +78,7 @@ public class LoginDataSource extends AppCompatActivity {
                                 jsonObjectResponse.getString("id"),
                                 jsonObjectResponse.getString("firstname"),
                                 jsonObjectResponse.getString("lastname"),
-                                jsonObjectResponse.getLong("birthday"),
+                                jsonObjectResponse.getString("birthday"),
                                 jsonObjectResponse.getString("email"),
                                 jsonObjectResponse.getString("password"),
                                 jsonObjectResponse.getString("address"),
@@ -88,11 +87,12 @@ public class LoginDataSource extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    Log.d ("LoginDataSource", "Antes del callback");
+                    Log.d (TAG, "Antes del callback");
                     serverCallback.onSuccess(userLogin);
 
                 } else {
-                    Log.d ("LoginDataSource", "Usuario y contraseña incorrecta");
+                    Log.d (TAG, "Usuario y contraseña incorrecta");
+                    Log.d (TAG , "Server response: " + response);
                     userPassIncorrect = true;
                     Toast.makeText(LoginActivity.getContext(),
                             "Server response: " + response,
@@ -104,34 +104,9 @@ public class LoginDataSource extends AppCompatActivity {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e ("LoginDataSource", "Error en respuesta del servidor: " +
+                Log.e (TAG, "Error en respuesta del servidor: " +
                         error.getMessage());
-                if (error instanceof TimeoutError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.error_network_timeout,
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof NoConnectionError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.error_no_connection,
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof AuthFailureError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.authentification_error,
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ServerError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.server_error,
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.network_error,
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(LoginActivity.getContext(),
-                            R.string.parse_error,
-                            Toast.LENGTH_LONG).show();
-                }
-                error.printStackTrace();
+                Connecting.onErrorResponseGeneral(error);
                 serverCallback.onError();
             }
         }) {
@@ -151,21 +126,5 @@ public class LoginDataSource extends AppCompatActivity {
 
     public void logout() {
         // TODO: revoke authentication
-    }
-
-    private boolean waitUntilDownloaded (){
-        for (int iWait = 0;iWait < 10; iWait++){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                break;
-            }
-
-            if (userLogin != null){
-                return true;
-            }
-        }
-        return false;
     }
 }

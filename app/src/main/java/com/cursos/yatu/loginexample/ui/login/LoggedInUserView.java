@@ -7,17 +7,17 @@ public class LoggedInUserView {
     private String displayName;
     private String firsName;
     private String lastName;
-    private long birthdate;
+    private String birthday;
     private String email;
     private String address;
     private String notes;
 
     LoggedInUserView(String displayName, String firsName, String lastName,
-                     long birthdate, String email, String address, String notes) {
+                     String birthday, String email, String address, String notes) {
         this.displayName = displayName;
         this.firsName = firsName;
         this.lastName = lastName;
-        this.birthdate = birthdate;
+        this.birthday = birthday;
         this.email = email;
         this.address = address;
         this.notes= notes;
@@ -43,12 +43,12 @@ public class LoggedInUserView {
         this.lastName = lastName;
     }
 
-    public long getBirthdate() {
-        return birthdate;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setBirthdate(long birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public String getEmail() {

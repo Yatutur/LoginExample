@@ -8,7 +8,7 @@ public class LoggedInUser {
     private String userId;
     private String firstName;
     private String lastName;
-    private long birthdate;
+    private String birthday;
     private String password;
     private String email;
     private String address;
@@ -17,12 +17,12 @@ public class LoggedInUser {
     public LoggedInUser() {
     }
 
-    public LoggedInUser(String userId, String firstName, String lastName, long birtdate,
+    public LoggedInUser(String userId, String firstName, String lastName, String birthday,
                         String password, String email, String address, String notes) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.birthdate = birtdate;
+        this.birthday = birthday;
         this.password = password;
         this.email = email;
         this.address = address;
@@ -49,11 +49,9 @@ public class LoggedInUser {
         this.lastName = lastName;
     }
 
-    public long getBirthdate() {
-        return birthdate;
-    }
+    public String getBirthday() { return birthday; }
 
-    public void setBirthdate(long birthdate) { this.birthdate = birthdate; }
+    public void setBirthday(String birthday) { this.birthday = birthday; }
 
     public String getPassword() {
         return password;

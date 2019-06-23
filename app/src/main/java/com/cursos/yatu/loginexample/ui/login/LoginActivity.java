@@ -21,12 +21,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.cursos.yatu.loginexample.LoggedInUserActivity;
 import com.cursos.yatu.loginexample.R;
-import com.cursos.yatu.loginexample.RegisterFormActivity;
+import com.cursos.yatu.loginexample.ui.register.RegisterFormActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "LoginActivity";
     private LoginViewModel loginViewModel;
 
     private static Context sContext;
@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
+                Log.d(TAG, "Entra en onChanged getLoginFormState");
                 if (loginFormState == null) {
                     return;
                 }
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
+                Log.d(TAG, "Entra en onChanged getLoginResult");
                 if (loginResult == null) {
                     return;
                 }
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-//                finish();
+                finish();
             }
         });
 
@@ -98,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                Log.d (TAG, "etPassword: afterTextChanged");
                 loginViewModel.loginDataChanged(etEmail.getText().toString(),
                         etPassword.getText().toString());
             }
@@ -109,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Log.d (TAG, "etEmail: onEditorAction");
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(etEmail.getText().toString(),
                             etPassword.getText().toString());

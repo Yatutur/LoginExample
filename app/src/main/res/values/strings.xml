@@ -16,4 +16,9 @@
     <string name="network_error">Network error</string>
     <string name="server_error">Server error. The address may have changed.</string>
     <string name="connection_success">Connection success</string>
+    <string name="password_not_match">Passwords do not match</string>
+    <string name="invalid_firstName">First name is mandatory</string>
+    <string name="invalid_birthday">Birthday is mandatory</string>
+    <string name="keystore_yatu_password">dw22DW22=</string>
+    <string name="correct_password">Correct user and password</string>
 </resources>
