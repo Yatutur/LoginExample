@@ -5,13 +5,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.cursos.yatu.loginexample.R;
@@ -42,7 +37,7 @@ public class LoginDataSource extends AppCompatActivity {
     public void login(final String email, final String password,
                                       ServerCallback serverCallback) {
 
-        Log.d (TAG, "Comienza login");
+        Log.d (TAG, "Begin login");
         callServer (email, password, serverCallback);
 
     }
@@ -65,7 +60,7 @@ public class LoginDataSource extends AppCompatActivity {
                 Log.d (TAG, "Entra en onResponse");
                 if (response.indexOf("Wrong email or password") == -1) {
                     try {
-                        Log.d (TAG, getString(R.string.correct_password));
+                        Log.d (TAG, LoginActivity.getContext().getResources().getString(R.string.correct_password));
                         Log.d (TAG, "Response: " + response);
                         jsonObjectResponse = new JSONObject(response);
 

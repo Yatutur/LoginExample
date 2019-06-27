@@ -9,22 +9,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cursos.yatu.loginexample.R;
 
-import java.io.BufferedInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.security.KeyManagementException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
+
 
 /**
  * Created by For on 4/24/2017.
@@ -68,7 +61,8 @@ public class MySingleton {
             InputStream inStream = mCtx.getApplicationContext().getResources().openRawResource(R.raw.server_yatu);
 
             KeyStore ks = KeyStore.getInstance("BKS");
-            ks.load(inStream, "dw22DW22=".toCharArray());
+            ks.load(inStream,
+                    mCtx.getApplicationContext().getResources().getString(R.string.keystore_yatu_password).toCharArray());
             inStream.close();
 
             KeyManagerFactory kmf = KeyManagerFactory.getInstance("X509");
