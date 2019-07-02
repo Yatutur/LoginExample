@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">LoginExample</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_login">Login in</string>
+    <string name="action_login_short">Login</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_email">Not a valid email</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="error_network_timeout">Server timeout</string>
+    <string name="error_no_connection">Connection error</string>
+    <string name="authentification_error">Authentification error</string>
+    <string name="parse_error">Parse error</string>
+    <string name="network_error">Network error</string>
+    <string name="server_error">Server error. The address may have changed.</string>
+    <string name="connection_success">Connection success</string>
+    <string name="password_not_match">Passwords do not match</string>
+    <string name="invalid_firstName">First name is mandatory</string>
+    <string name="invalid_birthday">Birthday is mandatory</string>
+    <string name="correct_password">Correct user and password</string>
+</resources>
