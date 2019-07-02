@@ -12,5 +12,5 @@
 /captures
 .externalNativeBuild
 
-# Testing git
-log.txt
+#Passwords file
+stringsPasswords.xml
